@@ -16,6 +16,8 @@
 # Load all of the data and correlate the lengths of the vectors
 # The "X" files take a long time; uncomment for final version
 
+setwd("C:/documents/work/R/Coursera/GetCleanData/ProjectData")
+
 xtrain <- read.table("train/X_train.txt", header = FALSE)
 trainactlabels <- read.table("train/y_train.txt", header = FALSE)
 xtest <- read.table("test/X_test.txt", header = FALSE)
@@ -61,6 +63,16 @@ y <- x[,ms]
 # transform feature columns into readable names
 
 names(y) <- xfeatures[ms,2]
+
+# add Activity and Subject to the data
+
+names(actcode) <- "Activity"
+names(subj) <- "Subject"
+z <- cbind(actcode, y)
+z <- cbind(subj, z)
+
+
+
 
 
 
