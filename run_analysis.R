@@ -70,5 +70,23 @@ names(y) <- xfeatures[ms,2]
 names(actcode) <- "Activity"
 names(subj) <- "Subject"
 
+actcode[actcode == 1] <- "WALKING"
+actcode[actcode == 2] <- "WALKING_UPSTAIRS"
+actcode[actcode == 3] <- "WALKING_DOWNSTAIRS"
+actcode[actcode == 4] <- "SITTING"
+actcode[actcode == 5] <- "STANDING"
+actcode[actcode == 6] <- "LAYING"
+
 y <- cbind(actcode, y)
-y <- cbind(subj, z)
+y <- cbind(subj, y)
+
+# melt and cast the data frame to take the means of the variable columns
+# id columns to be set as Subject and Activity
+
+ymelt <- melt(y, id = c("Subject", "Activity"), measure.vars = as.character(xfeatures[ms, 2]))
+z <- dcast(ymelt, Subject + Activity ~ variable, mean)
+
+# Save the tidy data
+
+write.csv(z, "SubjActMotion.csv", sep = ",")
+
