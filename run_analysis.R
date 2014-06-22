@@ -17,6 +17,7 @@
 # The "X" files take a long time; uncomment for final version
 
 setwd("C:/documents/work/R/Coursera/GetCleanData/ProjectData")
+library(reshape2)
 
 xtrain <- read.table("train/X_train.txt", header = FALSE)
 trainactlabels <- read.table("train/y_train.txt", header = FALSE)
@@ -59,7 +60,7 @@ actcode <- rbind(trainactlabels, testactlabels)
 # and X_test
 
 y <- x[,ms]
-
+`
 # transform feature columns into readable names
 
 names(y) <- xfeatures[ms,2]
@@ -68,26 +69,6 @@ names(y) <- xfeatures[ms,2]
 
 names(actcode) <- "Activity"
 names(subj) <- "Subject"
-z <- cbind(actcode, y)
-z <- cbind(subj, z)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+y <- cbind(actcode, y)
+y <- cbind(subj, z)
